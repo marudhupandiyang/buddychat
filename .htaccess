@@ -1,0 +1,33 @@
+#php_value session.auto_start "1"
+
+php_flag display_errors on
+
+#php_value auto_prepend_file "prepend.php"
+
+
+Options -Indexes
+
+
+ErrorDocument 401 /error.php
+ErrorDocument 400 /error.php
+ErrorDocument 403 /error.php
+ErrorDocument 500 /error.php
+ErrorDocument 404 /error.php
+
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)$ - [NC,L]
+RewriteRule ^(.*)$ route.php
+
+
+#AddOutputFilterByType DEFLATE text/html
+
+#AddOutputFilterByType DEFLATE text/css
+
+AddOutputFilterByType DEFLATE application/javascript
+
+#AddOutputFilterByType DEFLATE application/json
